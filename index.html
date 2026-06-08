@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thiệp Cưới – Anh Thư & Văn Lợi</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
     --black: #0a0a0a;
     --white: #f9f6f1;
@@ -16,526 +15,535 @@
     --light: #e8e4dc;
   }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--black);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
+    cursor: default;
   }
 
-  /* Animated background particles */
-  .bg-particles {
+  /* ===== MUSIC PLAYER ===== */
+  .music-btn {
     position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 999;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    transition: transform 0.3s;
+  }
+  .music-btn:hover { transform: scale(1.1); }
+  .music-btn svg { width: 20px; height: 20px; fill: white; }
+  .music-btn.playing svg.play { display: none; }
+  .music-btn:not(.playing) svg.pause { display: none; }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
     overflow: hidden;
   }
-  .particle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: float linear infinite;
-    opacity: 0;
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('photo1.jpg');
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(0.35);
+    transform: scale(1.05);
+    animation: slowZoom 20s ease-in-out infinite alternate;
   }
-  @keyframes float {
-    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-    10%  { opacity: 0.6; }
-    90%  { opacity: 0.3; }
-    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.15); }
   }
-
-  /* Card wrapper */
-  .card-wrapper {
-    position: relative;
-    z-index: 1;
-    padding: 2rem 1rem;
-    width: 100%;
-    max-width: 520px;
-    animation: fadeUp 1.2s ease both;
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.95) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    text-align: center; padding: 2rem;
+    animation: fadeUp 1.5s ease both;
   }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
+    from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
-  /* Outer border frame */
-  .card-frame {
-    border: 1px solid rgba(201,168,76,0.35);
-    padding: 3px;
-    position: relative;
+  .hero-label {
+    font-weight: 200; font-size: 0.6rem; letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    display: block;
   }
-  .card-frame::before, .card-frame::after {
-    content: '';
-    position: absolute;
-    border: 1px solid rgba(201,168,76,0.15);
+  .hero-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 300; color: white; line-height: 1;
+    font-style: italic;
   }
-  .card-frame::before { inset: 6px; }
-  .card-frame::after  { inset: 12px; }
-
-  /* Corner ornaments */
-  .corner {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    z-index: 2;
+  .hero-amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--gold); font-style: italic;
+    display: block; margin: 0.3rem 0;
   }
-  .corner svg { width: 100%; height: 100%; }
-  .corner.tl { top: -1px; left: -1px; }
-  .corner.tr { top: -1px; right: -1px; transform: scaleX(-1); }
-  .corner.bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
-  .corner.br { bottom: -1px; right: -1px; transform: scale(-1); }
-
-  /* Card inner */
-  .card {
-    background: var(--white);
-    padding: 3.5rem 2.8rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Subtle texture overlay */
-  .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .card > * { position: relative; z-index: 1; }
-
-  /* Top label */
-  .label-top {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 0.6rem;
-    letter-spacing: 0.45em;
+  .hero-date {
+    margin-top: 2rem;
+    font-weight: 200; font-size: 0.7rem;
+    letter-spacing: 0.4em; color: rgba(255,255,255,0.7);
     text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 1.8rem;
-    animation: fadeUp 1s 0.3s ease both;
-    opacity: 0;
   }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.4); font-size: 0.55rem; letter-spacing: 0.3em;
+    animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(6px); }
+  }
+  .scroll-hint svg { width: 16px; opacity: 0.5; }
 
-  /* Gold divider line */
+  /* ===== SECTION BASE ===== */
+  section { padding: 5rem 1.5rem; }
+  .section-inner { max-width: 680px; margin: 0 auto; }
+  .section-label {
+    text-align: center; font-weight: 200; font-size: 0.55rem;
+    letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; display: block;
+  }
   .divider {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin: 1.2rem 0;
-    animation: fadeUp 1s 0.5s ease both;
-    opacity: 0;
+    display: flex; align-items: center; gap: 0.8rem;
+    margin: 1.5rem 0;
   }
   .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
+    content: ''; flex: 1; height: 1px;
     background: linear-gradient(to right, transparent, var(--gold), transparent);
   }
-  .divider-diamond {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
+  .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
 
-  /* Names */
-  .names-block {
-    text-align: center;
-    animation: fadeUp 1s 0.45s ease both;
-    opacity: 0;
+  /* ===== INFO CARD ===== */
+  .info-section { background: var(--white); }
+  .info-card {
+    background: white;
+    border: 1px solid var(--light);
+    padding: 3rem 2.5rem;
+    position: relative;
   }
-  .bride-groom {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: 1rem;
-    letter-spacing: 0.15em;
-    color: var(--gray);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 0.2rem;
+  .info-card::before {
+    content: '';
+    position: absolute; inset: 8px;
+    border: 1px solid rgba(201,168,76,0.2);
+    pointer-events: none;
   }
-  .name-main {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 2.6rem;
-    line-height: 1.1;
-    color: var(--black);
-    display: block;
-    letter-spacing: 0.02em;
-  }
-  .ampersand {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 2.2rem;
-    color: var(--gold);
-    line-height: 1;
-    display: block;
-    margin: 0.4rem 0;
-  }
-
-  /* Announcement text */
-  .announcement {
+  .invite-text {
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--gray);
-    line-height: 1.7;
-    animation: fadeUp 1s 0.6s ease both;
-    opacity: 0;
+    font-style: italic; font-size: 1.05rem; color: var(--gray);
+    line-height: 1.8; margin-bottom: 2rem;
   }
-
-  /* Date / Time / Venue block */
-  .info-block {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 0;
-    margin: 1.6rem 0;
-    animation: fadeUp 1s 0.7s ease both;
-    opacity: 0;
+  .info-grid {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    margin: 2rem 0;
   }
-  .info-col {
-    text-align: center;
-    padding: 1.2rem 0.8rem;
+  .info-col { text-align: center; padding: 1.5rem 1rem; }
+  .info-sep { background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 1rem 0; }
+  .info-lbl {
+    font-size: 0.5rem; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold);
+    display: block; margin-bottom: 0.6rem;
   }
-  .info-sep {
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    margin: 0.8rem 0;
-  }
-  .info-label {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 0.5rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  .info-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 1.05rem;
-    color: var(--black);
-    line-height: 1.4;
-    display: block;
-  }
-  .info-value.big {
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1;
-  }
-
-  /* Venue full-width */
+  .info-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--black); display: block; line-height: 1.4; }
+  .info-val.big { font-size: 2.2rem; font-weight: 300; line-height: 1; }
   .venue-block {
-    text-align: center;
-    padding: 1rem 0 0.5rem;
+    text-align: center; padding-top: 1.5rem;
     border-top: 1px solid var(--light);
-    animation: fadeUp 1s 0.8s ease both;
-    opacity: 0;
   }
   .venue-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--black);
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 0.3rem;
+    font-size: 1.2rem; font-weight: 600; color: var(--black);
+    display: block; margin-bottom: 0.4rem;
   }
   .venue-addr {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--gray);
+    font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray);
   }
+  .map-link {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+    padding-bottom: 2px; transition: opacity 0.2s;
+  }
+  .map-link:hover { opacity: 0.7; }
 
-  /* Quote */
-  .quote-block {
-    text-align: center;
-    margin: 1.6rem 0 0;
-    padding: 1.4rem 1rem;
+  /* ===== COUNTDOWN ===== */
+  .countdown-section { background: var(--black); }
+  .countdown {
+    display: flex; justify-content: center;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .cd-item { text-align: center; }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 300; color: white; line-height: 1; display: block;
+  }
+  .cd-lbl {
+    font-size: 0.5rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    display: block; margin-top: 0.4rem;
+  }
+  .cd-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; color: var(--gold);
+    align-self: center; margin-bottom: 1rem; opacity: 0.4;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: white; text-align: center; margin-bottom: 0.5rem;
+  }
+  .section-title.dark { color: var(--black); }
+
+  /* ===== GALLERY ===== */
+  .gallery-section { background: var(--black); padding-bottom: 0; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 4px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .gallery-item { overflow: hidden; position: relative; aspect-ratio: 3/4; }
+  .gallery-item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/9;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,10,10,0);
+    transition: background 0.3s;
+  }
+  .gallery-item:hover .gallery-overlay { background: rgba(10,10,10,0.15); }
+
+  /* ===== QUOTE ===== */
+  .quote-section { background: var(--white); }
+  .quote-box {
     border: 1px solid var(--light);
-    background: rgba(201,168,76,0.04);
-    animation: fadeUp 1s 0.9s ease both;
-    opacity: 0;
+    padding: 3rem 2.5rem;
+    text-align: center; position: relative;
+    background: rgba(201,168,76,0.03);
   }
   .quote-mark {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    line-height: 0.5;
-    color: var(--gold);
-    opacity: 0.5;
-    display: block;
-    margin-bottom: 0.4rem;
+    font-size: 5rem; line-height: 0.5;
+    color: var(--gold); opacity: 0.3; display: block;
+    margin-bottom: 1rem;
   }
   .quote-text {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--gray);
-    line-height: 1.7;
+    font-style: italic; font-size: 1.15rem;
+    color: var(--gray); line-height: 1.9;
   }
 
-  /* Bottom seal */
-  .seal {
-    text-align: center;
-    margin-top: 1.8rem;
-    animation: fadeUp 1s 1s ease both;
-    opacity: 0;
-  }
-  .seal-ring {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px; height: 52px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    position: relative;
-  }
-  .seal-ring::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 50%;
-  }
-  .seal-inner {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.7rem;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-  }
-
-  /* Floating petals */
-  .petal {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0.06;
-    font-size: 1.2rem;
-    animation: drift linear infinite;
-  }
-  @keyframes drift {
-    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.07; }
-    100% { transform: translateY(-120%) rotate(360deg); opacity: 0; }
-  }
-
-  /* Countdown */
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-top: 1.4rem;
-    animation: fadeUp 1s 1.1s ease both;
-    opacity: 0;
-  }
-  .countdown-item {
-    text-align: center;
-  }
-  .countdown-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: var(--black);
-    line-height: 1;
+  /* ===== MAP ===== */
+  .map-section { background: var(--black); padding: 5rem 0 0; }
+  .map-section .section-inner { padding: 0 1.5rem 3rem; }
+  .map-embed {
+    width: 100%; height: 320px; border: none;
+    filter: grayscale(0.3) contrast(1.1);
     display: block;
   }
-  .countdown-lbl {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 0.45rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: block;
-    margin-top: 0.2rem;
+
+  /* ===== QR / GIFT ===== */
+  .gift-section { background: var(--white); }
+  .gift-box {
+    border: 1px solid var(--light);
+    padding: 2.5rem 2rem; text-align: center;
+    max-width: 340px; margin: 0 auto;
   }
-  .countdown-sep {
+  .gift-note {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--gold);
-    align-self: center;
-    margin-bottom: 0.6rem;
-    opacity: 0.5;
+    font-style: italic; font-size: 0.95rem;
+    color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .qr-img {
+    width: 200px; height: auto;
+    border: 1px solid var(--light);
+    margin: 0 auto 1rem; display: block;
+    padding: 0.5rem; background: white;
+  }
+  .bank-info {
+    font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray);
+    line-height: 2;
+  }
+  .bank-info strong { color: var(--black); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--black); text-align: center;
+    padding: 4rem 1.5rem;
+  }
+  .footer-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 2rem;
+    color: white; margin-bottom: 0.5rem;
+  }
+  .footer-date {
+    font-size: 0.55rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .footer-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 2rem auto 0;
   }
 
+  /* ===== YOUTUBE hidden ===== */
+  #yt-player { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; }
+
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 480px) {
-    .card { padding: 2.5rem 1.8rem; }
-    .name-main { font-size: 2rem; }
-    .info-value.big { font-size: 1.6rem; }
+    .info-card { padding: 2rem 1.2rem; }
+    .info-val.big { font-size: 1.7rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child { aspect-ratio: 4/3; }
+    .gallery-item { aspect-ratio: 4/3; }
+    .countdown { gap: 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- Background particles -->
-<div class="bg-particles" id="particles"></div>
+<!-- YouTube hidden player -->
+<div id="yt-player"></div>
 
-<div class="card-wrapper">
-  <div class="card-frame">
-    <!-- Corner ornaments -->
-    <div class="corner tl">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 27 L1 1 L27 1" stroke="#c9a84c" stroke-width="1" fill="none"/>
-        <path d="M1 14 Q7 7 14 1" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.5"/>
-      </svg>
+<!-- Music button -->
+<button class="music-btn" id="musicBtn" title="Bật/tắt nhạc" onclick="toggleMusic()">
+  <svg class="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg class="pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-label">Save The Date</span>
+    <div class="hero-names">
+      Anh Thư
+      <span class="hero-amp">&amp;</span>
+      Văn Lợi
     </div>
-    <div class="corner tr">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 27 L1 1 L27 1" stroke="#c9a84c" stroke-width="1" fill="none"/>
-        <path d="M1 14 Q7 7 14 1" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="corner bl">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 27 L1 1 L27 1" stroke="#c9a84c" stroke-width="1" fill="none"/>
-        <path d="M1 14 Q7 7 14 1" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="corner br">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 27 L1 1 L27 1" stroke="#c9a84c" stroke-width="1" fill="none"/>
-        <path d="M1 14 Q7 7 14 1" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.5"/>
-      </svg>
-    </div>
+    <p class="hero-date">Chủ Nhật · 19 · 07 · 2025</p>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    <span>Cuộn xuống</span>
+  </div>
+</section>
 
-    <div class="card" id="card">
-      <!-- Floating petals -->
-      <span class="petal" style="left:10%;top:20%;animation-duration:12s;animation-delay:0s;">✦</span>
-      <span class="petal" style="left:80%;top:60%;animation-duration:15s;animation-delay:3s;">✧</span>
-      <span class="petal" style="left:50%;top:80%;animation-duration:10s;animation-delay:6s;">✦</span>
-
-      <p class="label-top">— Trân trọng kính mời —</p>
-
-      <div class="names-block">
-        <span class="bride-groom">Cô dâu</span>
-        <span class="name-main">Anh Thư</span>
-        <span class="ampersand">&amp;</span>
-        <span class="bride-groom">Chú rể</span>
-        <span class="name-main">Văn Lợi</span>
-      </div>
-
-      <div class="divider"><div class="divider-diamond"></div></div>
-
-      <p class="announcement">
+<!-- ===== THÔNG TIN ===== -->
+<section class="info-section">
+  <div class="section-inner">
+    <div class="info-card">
+      <span class="section-label">Lễ Thành Hôn</span>
+      <h2 class="section-title dark" style="margin-bottom:1rem;">Nguyễn Thị Anh Thư<br><span style="font-size:1.5rem;color:var(--gold)">&amp;</span><br>Phạm Văn Lợi</h2>
+      <div class="divider"><div class="diamond"></div></div>
+      <p class="invite-text">
         Trân trọng kính mời quý vị đến dự<br>
-        <em>Lễ Thành Hôn</em> của chúng tôi
+        <em>Lễ Thành Hôn</em> của chúng tôi.<br>
+        Sự hiện diện của bạn là niềm hạnh phúc<br>
+        lớn nhất trong ngày trọng đại này.
       </p>
-
-      <div class="info-block">
+      <div class="info-grid">
         <div class="info-col">
-          <span class="info-label">Ngày</span>
-          <span class="info-value" style="font-size:0.8rem;letter-spacing:0.08em;">Chủ Nhật</span>
-          <span class="info-value big">19</span>
-          <span class="info-value" style="font-size:0.8rem;">tháng 07 · 2025</span>
+          <span class="info-lbl">Ngày</span>
+          <span class="info-val" style="font-size:0.85rem;letter-spacing:0.06em;">Chủ Nhật</span>
+          <span class="info-val big">19</span>
+          <span class="info-val" style="font-size:0.8rem;">Tháng 07 · 2025</span>
         </div>
         <div class="info-sep"></div>
         <div class="info-col">
-          <span class="info-label">Giờ tiệc</span>
-          <span class="info-value big" style="margin-top:0.4rem;">11:00</span>
-          <span class="info-value" style="font-size:0.72rem;color:#9a9a9a;margin-top:0.3rem;">Buổi sáng</span>
+          <span class="info-lbl">Giờ tiệc</span>
+          <span class="info-val big" style="margin-top:0.5rem;">11:00</span>
+          <span class="info-val" style="font-size:0.7rem;color:var(--gray);margin-top:0.3rem;">Buổi sáng</span>
         </div>
       </div>
-
       <div class="venue-block">
-        <span class="info-label" style="margin-bottom:0.6rem;">Địa điểm</span>
+        <span class="info-lbl">Địa điểm</span>
         <span class="venue-name">Tư Gia Nhà Gái</span>
-        <span class="venue-addr">Đường N16 · Thới Hòa · TP. Hồ Chí Minh</span>
+        <span class="venue-addr">Đường N16 · Thới Hòa · TP. Hồ Chí Minh</span><br>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=N16+Thới+Hòa+TP+Hồ+Chí+Minh" target="_blank">
+          ↗ Xem trên Google Maps
+        </a>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="divider" style="margin:1.4rem 0 0;"><div class="divider-diamond"></div></div>
+<!-- ===== COUNTDOWN ===== -->
+<section class="countdown-section">
+  <div class="section-inner">
+    <span class="section-label">Đếm ngược</span>
+    <h2 class="section-title">Ngày trọng đại sắp đến</h2>
+    <div class="divider"><div class="diamond"></div></div>
+    <div class="countdown" id="countdown">
+      <div class="cd-item"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Ngày</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-item"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Giờ</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-item"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Phút</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-item"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Giây</span></div>
+    </div>
+  </div>
+</section>
 
-      <div class="quote-block">
-        <span class="quote-mark">"</span>
-        <p class="quote-text">
-          Tình yêu không phải là nhìn nhau,<br>
-          mà là cùng nhau nhìn về một hướng.<br>
-          Sự hiện diện của bạn là ý nghĩa lớn nhất<br>
-          trong ngày trọng đại của chúng tôi.
-        </p>
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section">
+  <div style="max-width:800px;margin:0 auto;padding:0 1.5rem 2rem;">
+    <span class="section-label">Album ảnh</span>
+    <h2 class="section-title">Khoảnh khắc của chúng mình</h2>
+    <div class="divider"><div class="diamond"></div></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="photo1.jpg" alt="Anh Thư & Văn Lợi"><div class="gallery-overlay"></div></div>
+    <div class="gallery-item"><img src="photo2.jpg" alt="Khoảnh khắc lãng mạn"><div class="gallery-overlay"></div></div>
+    <div class="gallery-item"><img src="photo3.jpg" alt="Cùng nhau"><div class="gallery-overlay"></div></div>
+    <div class="gallery-item"><img src="photo4.jpg" alt="Hạnh phúc"><div class="gallery-overlay"></div></div>
+    <div class="gallery-item"><img src="photo5.jpg" alt="Yêu thương"><div class="gallery-overlay"></div></div>
+    <div class="gallery-item"><img src="photo6.jpg" alt="Mãi bên nhau"><div class="gallery-overlay"></div></div>
+  </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<section class="quote-section">
+  <div class="section-inner">
+    <div class="quote-box">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        Tình yêu không phải là nhìn nhau,<br>
+        mà là cùng nhau nhìn về một hướng.<br><br>
+        Sự hiện diện của bạn là ý nghĩa lớn nhất<br>
+        trong ngày trọng đại của chúng tôi.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAP ===== -->
+<section class="map-section">
+  <div class="section-inner">
+    <span class="section-label">Địa điểm</span>
+    <h2 class="section-title">Tìm đường đến với chúng tôi</h2>
+    <div class="divider"><div class="diamond"></div></div>
+  </div>
+  <iframe
+    class="map-embed"
+    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Thới+Hòa,+TP.+Hồ+Chí+Minh"
+    allowfullscreen loading="lazy">
+  </iframe>
+</section>
+
+<!-- ===== QR GIFT ===== -->
+<section class="gift-section">
+  <div class="section-inner">
+    <span class="section-label">Hộp mừng cưới</span>
+    <h2 class="section-title dark">Mừng cưới</h2>
+    <div class="divider"><div class="diamond"></div></div>
+    <div class="gift-box">
+      <p class="gift-note">
+        Nếu bạn muốn gửi lời chúc mừng qua<br>
+        hộp mừng cưới, xin chân thành cảm ơn!
+      </p>
+      <img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi">
+      <div class="bank-info">
+        <p>Ngân hàng: <strong>Vietcombank</strong></p>
+        <p>Tên: <strong>PHAM VAN LOI</strong></p>
+        <p>STK: <strong>0281000655718</strong></p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Countdown -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-days">--</span>
-          <span class="countdown-lbl">Ngày</span>
-        </div>
-        <span class="countdown-sep">·</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-hours">--</span>
-          <span class="countdown-lbl">Giờ</span>
-        </div>
-        <span class="countdown-sep">·</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-mins">--</span>
-          <span class="countdown-lbl">Phút</span>
-        </div>
-        <span class="countdown-sep">·</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-secs">--</span>
-          <span class="countdown-lbl">Giây</span>
-        </div>
-      </div>
-
-      <div class="seal">
-        <div class="seal-ring">
-          <span class="seal-inner">AT&VL</span>
-        </div>
-      </div>
-    </div><!-- /card -->
-  </div><!-- /card-frame -->
-</div><!-- /card-wrapper -->
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="divider" style="max-width:300px;margin:0 auto 2rem;"><div class="diamond"></div></div>
+  <p class="footer-names">Anh Thư &amp; Văn Lợi</p>
+  <p class="footer-date">19 · 07 · 2025 · TP. Hồ Chí Minh</p>
+  <div class="footer-line"></div>
+</footer>
 
 <script>
-  // Countdown to July 19, 2025 11:00 AM
-  const weddingDate = new Date('2025-07-19T11:00:00');
-  function updateCountdown() {
-    const now = new Date();
-    const diff = weddingDate - now;
+  // ===== COUNTDOWN =====
+  const wedding = new Date('2025-07-19T11:00:00');
+  function tick() {
+    const now = new Date(), diff = wedding - now;
     if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:#c9a84c;font-size:1rem;letter-spacing:0.1em;">✦ Hôm nay là ngày trọng đại! ✦</p>';
+      document.getElementById('countdown').innerHTML =
+        '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--gold);font-size:1.3rem;letter-spacing:0.1em;">✦ Hôm nay là ngày trọng đại! ✦</p>';
       return;
     }
-    const days  = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const secs  = Math.floor((diff % (1000*60)) / 1000);
-    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
-    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+    const d = Math.floor(diff/86400000),
+          h = Math.floor((diff%86400000)/3600000),
+          m = Math.floor((diff%3600000)/60000),
+          s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  tick(); setInterval(tick, 1000);
 
-  // Floating gold particles
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 35; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 3 + 1;
-    p.style.cssText = `
-      left: ${Math.random()*100}%;
-      width: ${size}px; height: ${size}px;
-      animation-duration: ${Math.random()*12+8}s;
-      animation-delay: ${Math.random()*10}s;
-    `;
-    container.appendChild(p);
+  // ===== YOUTUBE MUSIC =====
+  let player, playing = false;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('yt-player', {
+      videoId: 'V5USxHhWi3E',
+      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'V5USxHhWi3E' },
+      events: {
+        onStateChange: e => {
+          playing = e.data === YT.PlayerState.PLAYING;
+          document.getElementById('musicBtn').classList.toggle('playing', playing);
+        }
+      }
+    });
   }
+  function toggleMusic() {
+    if (!player) return;
+    if (playing) { player.pauseVideo(); }
+    else { player.playVideo(); }
+  }
+  // Load YouTube API
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity=1; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('section').forEach(s => {
+    s.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    s.style.opacity = '0'; s.style.transform = 'translateY(20px)';
+    observer.observe(s);
+  });
 </script>
 </body>
 </html>
