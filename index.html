@@ -14,63 +14,34 @@
     --gray: #6b6b6b;
     --light: #e8e4dc;
   }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--black); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-  body {
-    background: var(--black);
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
-    cursor: default;
-  }
 
-  /* ===== MUSIC PLAYER ===== */
-  .music-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 999;
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: none;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
-    transition: transform 0.3s;
-  }
-  .music-btn:hover { transform: scale(1.1); }
-  .music-btn svg { width: 20px; height: 20px; fill: white; }
-  .music-btn.playing svg.play { display: none; }
-  .music-btn:not(.playing) svg.pause { display: none; }
 
-  /* ===== HERO SECTION ===== */
+  /* HERO */
   .hero {
-    min-height: 100vh;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
+    min-height: 100vh; position: relative;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0;
     background-image: url('photo1.jpg');
     background-size: cover;
-    background-position: center top;
-    filter: brightness(0.35);
-    transform: scale(1.05);
+    background-position: center 30%;
+    filter: brightness(0.38);
     animation: slowZoom 20s ease-in-out infinite alternate;
   }
   @keyframes slowZoom {
-    from { transform: scale(1.05); }
-    to   { transform: scale(1.15); }
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.08); }
   }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.45) 60%, rgba(10,10,10,0.95) 100%);
   }
   .hero-content {
-    position: relative; z-index: 1;
-    text-align: center; padding: 2rem;
+    position: relative; z-index: 1; text-align: center; padding: 2rem;
     animation: fadeUp 1.5s ease both;
   }
   @keyframes fadeUp {
@@ -79,30 +50,24 @@
   }
   .hero-label {
     font-weight: 200; font-size: 0.6rem; letter-spacing: 0.5em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
-    display: block;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: block;
   }
   .hero-names {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(3rem, 10vw, 5.5rem);
-    font-weight: 300; color: white; line-height: 1;
-    font-style: italic;
+    font-weight: 300; color: white; line-height: 1.1; font-style: italic;
   }
   .hero-amp {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 6vw, 3rem);
-    color: var(--gold); font-style: italic;
-    display: block; margin: 0.3rem 0;
+    color: var(--gold); font-style: italic; display: block; margin: 0.3rem 0;
   }
   .hero-date {
-    margin-top: 2rem;
-    font-weight: 200; font-size: 0.7rem;
-    letter-spacing: 0.4em; color: rgba(255,255,255,0.7);
-    text-transform: uppercase;
+    margin-top: 2rem; font-weight: 200; font-size: 0.7rem;
+    letter-spacing: 0.4em; color: rgba(255,255,255,0.7); text-transform: uppercase;
   }
   .scroll-hint {
-    position: absolute; bottom: 2rem; left: 50%;
-    transform: translateX(-50%);
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     color: rgba(255,255,255,0.4); font-size: 0.55rem; letter-spacing: 0.3em;
     animation: bounce 2s ease infinite;
@@ -113,7 +78,7 @@
   }
   .scroll-hint svg { width: 16px; opacity: 0.5; }
 
-  /* ===== SECTION BASE ===== */
+  /* SECTIONS */
   section { padding: 5rem 1.5rem; }
   .section-inner { max-width: 680px; margin: 0 auto; }
   .section-label {
@@ -121,225 +86,151 @@
     letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold);
     margin-bottom: 1rem; display: block;
   }
-  .divider {
-    display: flex; align-items: center; gap: 0.8rem;
-    margin: 1.5rem 0;
+  .section-title {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(1.8rem, 5vw, 2.5rem); color: white; text-align: center; margin-bottom: 0.5rem;
   }
+  .section-title.dark { color: var(--black); }
+  .divider { display: flex; align-items: center; gap: 0.8rem; margin: 1.5rem 0; }
   .divider::before, .divider::after {
     content: ''; flex: 1; height: 1px;
     background: linear-gradient(to right, transparent, var(--gold), transparent);
   }
   .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
 
-  /* ===== INFO CARD ===== */
+  /* INFO */
   .info-section { background: var(--white); }
   .info-card {
-    background: white;
-    border: 1px solid var(--light);
-    padding: 3rem 2.5rem;
-    position: relative;
+    background: white; border: 1px solid var(--light); padding: 3rem 2.5rem; position: relative;
   }
   .info-card::before {
-    content: '';
-    position: absolute; inset: 8px;
-    border: 1px solid rgba(201,168,76,0.2);
-    pointer-events: none;
+    content: ''; position: absolute; inset: 8px;
+    border: 1px solid rgba(201,168,76,0.2); pointer-events: none;
   }
   .invite-text {
-    text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 1.05rem; color: var(--gray);
-    line-height: 1.8; margin-bottom: 2rem;
+    text-align: center; font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.05rem; color: var(--gray); line-height: 1.8; margin-bottom: 2rem;
   }
-  .info-grid {
-    display: grid; grid-template-columns: 1fr 1px 1fr;
-    margin: 2rem 0;
-  }
+  .info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; margin: 2rem 0; }
   .info-col { text-align: center; padding: 1.5rem 1rem; }
   .info-sep { background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 1rem 0; }
-  .info-lbl {
-    font-size: 0.5rem; letter-spacing: 0.35em;
-    text-transform: uppercase; color: var(--gold);
-    display: block; margin-bottom: 0.6rem;
-  }
+  .info-lbl { font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem; }
   .info-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--black); display: block; line-height: 1.4; }
   .info-val.big { font-size: 2.2rem; font-weight: 300; line-height: 1; }
-  .venue-block {
-    text-align: center; padding-top: 1.5rem;
-    border-top: 1px solid var(--light);
-  }
-  .venue-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; font-weight: 600; color: var(--black);
-    display: block; margin-bottom: 0.4rem;
-  }
-  .venue-addr {
-    font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray);
-  }
+  .venue-block { text-align: center; padding-top: 1.5rem; border-top: 1px solid var(--light); }
+  .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--black); display: block; margin-bottom: 0.4rem; }
+  .venue-addr { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); }
   .map-link {
     display: inline-block; margin-top: 1rem;
     font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
     color: var(--gold); text-decoration: none;
-    border-bottom: 1px solid rgba(201,168,76,0.4);
-    padding-bottom: 2px; transition: opacity 0.2s;
+    border-bottom: 1px solid rgba(201,168,76,0.4); padding-bottom: 2px; transition: opacity 0.2s;
   }
   .map-link:hover { opacity: 0.7; }
 
-  /* ===== COUNTDOWN ===== */
+  /* COUNTDOWN */
   .countdown-section { background: var(--black); }
-  .countdown {
-    display: flex; justify-content: center;
-    gap: 2rem; flex-wrap: wrap;
-  }
+  .countdown { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
   .cd-item { text-align: center; }
   .cd-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    font-weight: 300; color: white; line-height: 1; display: block;
+    font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 300; color: white; line-height: 1; display: block;
   }
-  .cd-lbl {
-    font-size: 0.5rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold);
-    display: block; margin-top: 0.4rem;
-  }
-  .cd-sep {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem; color: var(--gold);
-    align-self: center; margin-bottom: 1rem; opacity: 0.4;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: clamp(1.8rem, 5vw, 2.5rem);
-    color: white; text-align: center; margin-bottom: 0.5rem;
-  }
-  .section-title.dark { color: var(--black); }
+  .cd-lbl { font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 0.4rem; }
+  .cd-sep { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); align-self: center; margin-bottom: 1rem; opacity: 0.4; }
 
-  /* ===== GALLERY ===== */
-  .gallery-section { background: var(--black); padding-bottom: 0; }
+  /* GALLERY */
+  .gallery-section { background: var(--black); }
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    gap: 4px;
+    gap: 6px;
     max-width: 800px; margin: 0 auto;
   }
-  .gallery-item { overflow: hidden; position: relative; aspect-ratio: 3/4; }
-  .gallery-item:first-child {
+  /* Ảnh 1 full width - ảnh đôi đứng cạnh nhau */
+  .gallery-item {
+    overflow: hidden; position: relative;
+    aspect-ratio: 2/3;
+  }
+  .gallery-item.wide {
     grid-column: 1 / -1;
-    aspect-ratio: 16/9;
+    aspect-ratio: 3/2;
   }
   .gallery-item img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
     transition: transform 0.6s ease;
     display: block;
   }
+  /* Mỗi ảnh căn theo trọng tâm riêng */
+  .gallery-item:nth-child(1) img { object-position: center 25%; }
+  .gallery-item:nth-child(2) img { object-position: center 15%; }
+  .gallery-item:nth-child(3) img { object-position: center 20%; }
+  .gallery-item:nth-child(4) img { object-position: center 15%; }
+  .gallery-item:nth-child(5) img { object-position: center 20%; }
+  .gallery-item:nth-child(6) img { object-position: center 25%; }
   .gallery-item:hover img { transform: scale(1.04); }
-  .gallery-overlay {
-    position: absolute; inset: 0;
-    background: rgba(10,10,10,0);
-    transition: background 0.3s;
-  }
-  .gallery-item:hover .gallery-overlay { background: rgba(10,10,10,0.15); }
 
-  /* ===== QUOTE ===== */
+  /* QUOTE */
   .quote-section { background: var(--white); }
-  .quote-box {
-    border: 1px solid var(--light);
-    padding: 3rem 2.5rem;
-    text-align: center; position: relative;
-    background: rgba(201,168,76,0.03);
-  }
-  .quote-mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem; line-height: 0.5;
-    color: var(--gold); opacity: 0.3; display: block;
-    margin-bottom: 1rem;
-  }
-  .quote-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 1.15rem;
-    color: var(--gray); line-height: 1.9;
-  }
+  .quote-box { border: 1px solid var(--light); padding: 3rem 2.5rem; text-align: center; background: rgba(201,168,76,0.03); }
+  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 5rem; line-height: 0.5; color: var(--gold); opacity: 0.3; display: block; margin-bottom: 1rem; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: var(--gray); line-height: 1.9; }
 
-  /* ===== MAP ===== */
-  .map-section { background: var(--black); padding: 5rem 0 0; }
-  .map-section .section-inner { padding: 0 1.5rem 3rem; }
-  .map-embed {
-    width: 100%; height: 320px; border: none;
-    filter: grayscale(0.3) contrast(1.1);
-    display: block;
-  }
+  /* MAP */
+  .map-section { background: var(--black); padding-bottom: 0; }
+  .map-section .section-inner { padding-bottom: 3rem; }
+  .map-embed { width: 100%; height: 320px; border: none; filter: grayscale(0.2); display: block; margin-top: 2rem; }
 
-  /* ===== QR / GIFT ===== */
+  /* QR */
   .gift-section { background: var(--white); }
-  .gift-box {
+  .gift-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 2rem; text-align: center; }
+  .qr-card {
+    max-width: 280px; margin: 0 auto;
     border: 1px solid var(--light);
-    padding: 2.5rem 2rem; text-align: center;
-    max-width: 340px; margin: 0 auto;
+    border-radius: 16px;
+    padding: 1.8rem 1.5rem 1.5rem;
+    background: white;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    text-align: center;
   }
-  .gift-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 0.95rem;
-    color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;
+  .qr-card-label {
+    font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 1.2rem;
   }
   .qr-img {
-    width: 200px; height: auto;
-    border: 1px solid var(--light);
-    margin: 0 auto 1rem; display: block;
-    padding: 0.5rem; background: white;
+    width: 180px; height: 180px; object-fit: contain;
+    margin: 0 auto 1.2rem; display: block;
+    border: 1px solid var(--light); padding: 6px; border-radius: 8px;
   }
-  .bank-info {
-    font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray);
-    line-height: 2;
-  }
-  .bank-info strong { color: var(--black); }
+  .qr-divider { height: 1px; background: var(--light); margin: 1rem 0; }
+  .bank-info { font-size: 0.72rem; letter-spacing: 0.05em; color: var(--gray); line-height: 2.2; }
+  .bank-info strong { color: var(--black); font-weight: 500; }
 
-  /* ===== FOOTER ===== */
-  .footer {
-    background: var(--black); text-align: center;
-    padding: 4rem 1.5rem;
-  }
-  .footer-names {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 2rem;
-    color: white; margin-bottom: 0.5rem;
-  }
-  .footer-date {
-    font-size: 0.55rem; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--gold);
-  }
-  .footer-line {
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    margin: 2rem auto 0;
-  }
+  /* FOOTER */
+  .footer { background: var(--black); text-align: center; padding: 4rem 1.5rem; }
+  .footer-names { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; color: white; margin-bottom: 0.5rem; }
+  .footer-date { font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+  .footer-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); margin: 2rem auto 0; }
 
-  /* ===== YOUTUBE hidden ===== */
   #yt-player { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; }
 
-  /* ===== RESPONSIVE ===== */
   @media (max-width: 480px) {
     .info-card { padding: 2rem 1.2rem; }
     .info-val.big { font-size: 1.7rem; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item:first-child { aspect-ratio: 4/3; }
-    .gallery-item { aspect-ratio: 4/3; }
+    .gallery-grid { gap: 4px; }
     .countdown { gap: 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- YouTube hidden player -->
 <div id="yt-player"></div>
 
-<!-- Music button -->
-<button class="music-btn" id="musicBtn" title="Bật/tắt nhạc" onclick="toggleMusic()">
-  <svg class="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-  <svg class="pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-</button>
 
-<!-- ===== HERO ===== -->
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -358,12 +249,12 @@
   </div>
 </section>
 
-<!-- ===== THÔNG TIN ===== -->
+<!-- INFO -->
 <section class="info-section">
   <div class="section-inner">
     <div class="info-card">
       <span class="section-label">Lễ Thành Hôn</span>
-      <h2 class="section-title dark" style="margin-bottom:1rem;">Nguyễn Thị Anh Thư<br><span style="font-size:1.5rem;color:var(--gold)">&amp;</span><br>Phạm Văn Lợi</h2>
+      <h2 class="section-title dark">Nguyễn Thị Anh Thư<br><span style="font-size:1.5rem;color:var(--gold)">&amp;</span><br>Phạm Văn Lợi</h2>
       <div class="divider"><div class="diamond"></div></div>
       <p class="invite-text">
         Trân trọng kính mời quý vị đến dự<br>
@@ -389,7 +280,7 @@
         <span class="info-lbl">Địa điểm</span>
         <span class="venue-name">Tư Gia Nhà Gái</span>
         <span class="venue-addr">Đường N16 · Thới Hòa · TP. Hồ Chí Minh</span><br>
-        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=N16+Thới+Hòa+TP+Hồ+Chí+Minh" target="_blank">
+        <a class="map-link" href="https://www.google.com/maps/place/Nh%C3%A0+tr%E1%BB%8D+Nh%C3%A2n+T%C3%A2m/@11.0846069,106.6118166,17z/data=!3m1!4b1!4m6!3m5!1s0x3174cdc43c860cc7:0x6d3f5fae039b3255!8m2!3d11.0846069!4d106.6118166!16s%2Fg%2F11lkhnq7f_!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
           ↗ Xem trên Google Maps
         </a>
       </div>
@@ -397,7 +288,7 @@
   </div>
 </section>
 
-<!-- ===== COUNTDOWN ===== -->
+<!-- COUNTDOWN -->
 <section class="countdown-section">
   <div class="section-inner">
     <span class="section-label">Đếm ngược</span>
@@ -415,24 +306,28 @@
   </div>
 </section>
 
-<!-- ===== GALLERY ===== -->
+<!-- GALLERY -->
 <section class="gallery-section">
   <div style="max-width:800px;margin:0 auto;padding:0 1.5rem 2rem;">
     <span class="section-label">Album ảnh</span>
     <h2 class="section-title">Khoảnh khắc của chúng mình</h2>
     <div class="divider"><div class="diamond"></div></div>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-item"><img src="photo1.jpg" alt="Anh Thư & Văn Lợi"><div class="gallery-overlay"></div></div>
-    <div class="gallery-item"><img src="photo2.jpg" alt="Khoảnh khắc lãng mạn"><div class="gallery-overlay"></div></div>
-    <div class="gallery-item"><img src="photo3.jpg" alt="Cùng nhau"><div class="gallery-overlay"></div></div>
-    <div class="gallery-item"><img src="photo4.jpg" alt="Hạnh phúc"><div class="gallery-overlay"></div></div>
-    <div class="gallery-item"><img src="photo5.jpg" alt="Yêu thương"><div class="gallery-overlay"></div></div>
-    <div class="gallery-item"><img src="photo6.jpg" alt="Mãi bên nhau"><div class="gallery-overlay"></div></div>
+  <div class="gallery-grid" style="padding: 0 6px;">
+    <!-- Ảnh 1: full width -->
+    <div class="gallery-item wide"><img src="photo1.jpg" alt="Anh Thư & Văn Lợi"></div>
+    <!-- Ảnh 2-3: 2 cột -->
+    <div class="gallery-item"><img src="photo2.jpg" alt="Lãng mạn"></div>
+    <div class="gallery-item"><img src="photo3.jpg" alt="Cùng nhau"></div>
+    <!-- Ảnh 4-5: 2 cột -->
+    <div class="gallery-item"><img src="photo4.jpg" alt="Hạnh phúc"></div>
+    <div class="gallery-item"><img src="photo5.jpg" alt="Yêu thương"></div>
+    <!-- Ảnh 6: full width -->
+    <div class="gallery-item wide"><img src="photo6.jpg" alt="Mãi bên nhau"></div>
   </div>
 </section>
 
-<!-- ===== QUOTE ===== -->
+<!-- QUOTE -->
 <section class="quote-section">
   <div class="section-inner">
     <div class="quote-box">
@@ -447,7 +342,7 @@
   </div>
 </section>
 
-<!-- ===== MAP ===== -->
+<!-- MAP -->
 <section class="map-section">
   <div class="section-inner">
     <span class="section-label">Địa điểm</span>
@@ -456,33 +351,35 @@
   </div>
   <iframe
     class="map-embed"
-    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Thới+Hòa,+TP.+Hồ+Chí+Minh"
+    src="https://maps.google.com/maps?q=11.0846069,106.6118166&z=17&output=embed"
     allowfullscreen loading="lazy">
   </iframe>
 </section>
 
-<!-- ===== QR GIFT ===== -->
+<!-- QR GIFT -->
 <section class="gift-section">
   <div class="section-inner">
     <span class="section-label">Hộp mừng cưới</span>
     <h2 class="section-title dark">Mừng cưới</h2>
     <div class="divider"><div class="diamond"></div></div>
-    <div class="gift-box">
-      <p class="gift-note">
-        Nếu bạn muốn gửi lời chúc mừng qua<br>
-        hộp mừng cưới, xin chân thành cảm ơn!
-      </p>
+    <p class="gift-note">
+      Nếu bạn muốn gửi lời chúc mừng<br>
+      qua hộp mừng cưới, xin chân thành cảm ơn!
+    </p>
+    <div class="qr-card">
+      <span class="qr-card-label">❀ Mừng cưới đến chú rể</span>
       <img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi">
+      <div class="qr-divider"></div>
       <div class="bank-info">
         <p>Ngân hàng: <strong>Vietcombank</strong></p>
-        <p>Tên: <strong>PHAM VAN LOI</strong></p>
+        <p>Tên: <strong>Phạm Văn Lợi</strong></p>
         <p>STK: <strong>0281000655718</strong></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="divider" style="max-width:300px;margin:0 auto 2rem;"><div class="diamond"></div></div>
   <p class="footer-names">Anh Thư &amp; Văn Lợi</p>
@@ -491,19 +388,17 @@
 </footer>
 
 <script>
-  // ===== COUNTDOWN =====
+  // COUNTDOWN
   const wedding = new Date('2025-07-19T11:00:00');
   function tick() {
     const now = new Date(), diff = wedding - now;
     if (diff <= 0) {
       document.getElementById('countdown').innerHTML =
-        '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--gold);font-size:1.3rem;letter-spacing:0.1em;">✦ Hôm nay là ngày trọng đại! ✦</p>';
+        '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;color:var(--gold);font-size:1.3rem;">✦ Hôm nay là ngày trọng đại! ✦</p>';
       return;
     }
-    const d = Math.floor(diff/86400000),
-          h = Math.floor((diff%86400000)/3600000),
-          m = Math.floor((diff%3600000)/60000),
-          s = Math.floor((diff%60000)/1000);
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
     document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
     document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
@@ -511,37 +406,41 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // ===== YOUTUBE MUSIC =====
-  let player, playing = false;
+  // YOUTUBE MUSIC - tự động phát
+  let player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('yt-player', {
       videoId: 'V5USxHhWi3E',
-      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'V5USxHhWi3E' },
+      playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: 'V5USxHhWi3E', mute: 0 },
       events: {
-        onStateChange: e => {
-          playing = e.data === YT.PlayerState.PLAYING;
-          document.getElementById('musicBtn').classList.toggle('playing', playing);
+        onReady: e => {
+          // Thử autoplay, nếu trình duyệt chặn thì chờ user tương tác
+          try { e.target.playVideo(); } catch(err) {}
+          // Fallback: phát khi user chạm màn hình lần đầu
+          const unlock = () => { e.target.playVideo(); document.removeEventListener('click', unlock); document.removeEventListener('touchstart', unlock); };
+          document.addEventListener('click', unlock);
+          document.addEventListener('touchstart', unlock);
         }
       }
     });
   }
-  function toggleMusic() {
-    if (!player) return;
-    if (playing) { player.pauseVideo(); }
-    else { player.playVideo(); }
-  }
-  // Load YouTube API
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
 
-  // Scroll fade-in
+  // SCROLL FADE IN
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity=1; e.target.style.transform='translateY(0)'; } });
-  }, { threshold: 0.15 });
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
   document.querySelectorAll('section').forEach(s => {
     s.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    s.style.opacity = '0'; s.style.transform = 'translateY(20px)';
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(20px)';
     observer.observe(s);
   });
 </script>
