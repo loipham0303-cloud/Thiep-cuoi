@@ -17,8 +17,6 @@
   html { scroll-behavior: smooth; }
   body { background: var(--black); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-
-
   /* HERO */
   .hero {
     min-height: 100vh; position: relative;
@@ -48,24 +46,10 @@
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .hero-label {
-    font-weight: 200; font-size: 0.6rem; letter-spacing: 0.5em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: block;
-  }
-  .hero-names {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 10vw, 5.5rem);
-    font-weight: 300; color: white; line-height: 1.1; font-style: italic;
-  }
-  .hero-amp {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 6vw, 3rem);
-    color: var(--gold); font-style: italic; display: block; margin: 0.3rem 0;
-  }
-  .hero-date {
-    margin-top: 2rem; font-weight: 200; font-size: 0.7rem;
-    letter-spacing: 0.4em; color: rgba(255,255,255,0.7); text-transform: uppercase;
-  }
+  .hero-label { font-weight: 200; font-size: 0.6rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: block; }
+  .hero-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 300; color: white; line-height: 1.1; font-style: italic; }
+  .hero-amp { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 3rem); color: var(--gold); font-style: italic; display: block; margin: 0.3rem 0; }
+  .hero-date { margin-top: 2rem; font-weight: 200; font-size: 0.7rem; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
   .scroll-hint {
     position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
@@ -81,36 +65,18 @@
   /* SECTIONS */
   section { padding: 5rem 1.5rem; }
   .section-inner { max-width: 680px; margin: 0 auto; }
-  .section-label {
-    text-align: center; font-weight: 200; font-size: 0.55rem;
-    letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1rem; display: block;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: clamp(1.8rem, 5vw, 2.5rem); color: white; text-align: center; margin-bottom: 0.5rem;
-  }
+  .section-label { text-align: center; font-weight: 200; font-size: 0.55rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.8rem, 5vw, 2.5rem); color: white; text-align: center; margin-bottom: 0.5rem; }
   .section-title.dark { color: var(--black); }
   .divider { display: flex; align-items: center; gap: 0.8rem; margin: 1.5rem 0; }
-  .divider::before, .divider::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
   .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
 
   /* INFO */
   .info-section { background: var(--white); }
-  .info-card {
-    background: white; border: 1px solid var(--light); padding: 3rem 2.5rem; position: relative;
-  }
-  .info-card::before {
-    content: ''; position: absolute; inset: 8px;
-    border: 1px solid rgba(201,168,76,0.2); pointer-events: none;
-  }
-  .invite-text {
-    text-align: center; font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 1.05rem; color: var(--gray); line-height: 1.8; margin-bottom: 2rem;
-  }
+  .info-card { background: white; border: 1px solid var(--light); padding: 3rem 2.5rem; position: relative; }
+  .info-card::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(201,168,76,0.2); pointer-events: none; }
+  .invite-text { text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--gray); line-height: 1.8; margin-bottom: 2rem; }
   .info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; margin: 2rem 0; }
   .info-col { text-align: center; padding: 1.5rem 1rem; }
   .info-sep { background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 1rem 0; }
@@ -120,56 +86,35 @@
   .venue-block { text-align: center; padding-top: 1.5rem; border-top: 1px solid var(--light); }
   .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--black); display: block; margin-bottom: 0.4rem; }
   .venue-addr { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); }
-  .map-link {
-    display: inline-block; margin-top: 1rem;
-    font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); text-decoration: none;
-    border-bottom: 1px solid rgba(201,168,76,0.4); padding-bottom: 2px; transition: opacity 0.2s;
-  }
+  .map-link { display: inline-block; margin-top: 1rem; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.4); padding-bottom: 2px; transition: opacity 0.2s; }
   .map-link:hover { opacity: 0.7; }
 
   /* COUNTDOWN */
   .countdown-section { background: var(--black); }
   .countdown { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
   .cd-item { text-align: center; }
-  .cd-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 300; color: white; line-height: 1; display: block;
-  }
+  .cd-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 300; color: white; line-height: 1; display: block; }
   .cd-lbl { font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 0.4rem; }
   .cd-sep { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); align-self: center; margin-bottom: 1rem; opacity: 0.4; }
 
   /* GALLERY */
   .gallery-section { background: var(--black); }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    max-width: 800px; margin: 0 auto;
-  }
-  /* Ảnh 1 full width - ảnh đôi đứng cạnh nhau */
-  .gallery-item {
-    overflow: hidden; position: relative;
-    aspect-ratio: 2/3;
-  }
-  .gallery-item.wide {
-    grid-column: 1 / -1;
-    aspect-ratio: 3/2;
-  }
-  .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    transition: transform 0.6s ease;
-    display: block;
-  }
-  /* Mỗi ảnh căn theo trọng tâm riêng */
-  .gallery-item:nth-child(1) img { object-position: center 25%; }
-  .gallery-item:nth-child(2) img { object-position: center 15%; }
-  .gallery-item:nth-child(3) img { object-position: center 20%; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; max-width: 800px; margin: 0 auto; padding: 0 6px; }
+  .gallery-item { overflow: hidden; position: relative; aspect-ratio: 2/3; }
+  .gallery-item.wide { grid-column: 1 / -1; aspect-ratio: 16/9; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; transition: transform 0.6s ease; display: block; }
+  /* photo1 - ảnh đôi đứng, căn phần mặt */
+  .gallery-item:nth-child(1) img { object-position: center 18%; }
+  /* photo2 - hôn nhau trong lồng kính */
+  .gallery-item:nth-child(2) img { object-position: center 20%; }
+  /* photo3 - đứng cạnh cổng sắt, 2 người */
+  .gallery-item:nth-child(3) img { object-position: 35% 20%; }
+  /* photo4 - thác nước */
   .gallery-item:nth-child(4) img { object-position: center 15%; }
-  .gallery-item:nth-child(5) img { object-position: center 20%; }
-  .gallery-item:nth-child(6) img { object-position: center 25%; }
+  /* photo5 - ngồi trên bệ đá */
+  .gallery-item:nth-child(5) img { object-position: center 10%; }
+  /* photo6 - nâng ly champagne */
+  .gallery-item:nth-child(6) img { object-position: center 20%; }
   .gallery-item:hover img { transform: scale(1.04); }
 
   /* QUOTE */
@@ -183,30 +128,83 @@
   .map-section .section-inner { padding-bottom: 3rem; }
   .map-embed { width: 100%; height: 320px; border: none; filter: grayscale(0.2); display: block; margin-top: 2rem; }
 
-  /* QR */
-  .gift-section { background: var(--white); }
-  .gift-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 2rem; text-align: center; }
+  /* QR - SANG TRỌNG */
+  .gift-section { background: var(--black); }
+  .gift-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2.5rem; text-align: center; }
   .qr-card {
-    max-width: 280px; margin: 0 auto;
-    border: 1px solid var(--light);
-    border-radius: 16px;
-    padding: 1.8rem 1.5rem 1.5rem;
-    background: white;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    max-width: 300px; margin: 0 auto;
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px;
+    padding: 2.5rem 2rem 2rem;
     text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
   }
-  .qr-card-label {
-    font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); display: block; margin-bottom: 1.2rem;
+  .qr-card::before {
+    content: '';
+    position: absolute; inset: 6px;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 15px;
+    pointer-events: none;
   }
-  .qr-img {
-    width: 180px; height: 180px; object-fit: contain;
-    margin: 0 auto 1.2rem; display: block;
-    border: 1px solid var(--light); padding: 6px; border-radius: 8px;
+  .qr-card-top {
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    margin-bottom: 1.8rem;
   }
-  .qr-divider { height: 1px; background: var(--light); margin: 1rem 0; }
-  .bank-info { font-size: 0.72rem; letter-spacing: 0.05em; color: var(--gray); line-height: 2.2; }
-  .bank-info strong { color: var(--black); font-weight: 500; }
+  .qr-card-top::before, .qr-card-top::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
+  }
+  .qr-card-top::after { background: linear-gradient(to left, transparent, rgba(201,168,76,0.4)); }
+  .qr-card-label { font-size: 0.5rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  .qr-wrap {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 0 auto 1.5rem;
+    width: 180px; height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .qr-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .qr-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent); margin: 1.2rem 0; }
+  .bank-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.1em;
+    display: block; margin-bottom: 0.8rem;
+  }
+  .bank-info { font-size: 0.68rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); line-height: 2.2; }
+  .bank-info strong { color: rgba(255,255,255,0.85); font-weight: 400; }
+
+  /* RSVP */
+  .rsvp-section { background: var(--white); }
+  .rsvp-btn {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding: 1rem 2.5rem;
+    background: var(--black);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.4);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .rsvp-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .rsvp-btn:hover::before { transform: translateX(0); }
+  .rsvp-btn span { position: relative; z-index: 1; }
+  .rsvp-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--gray); margin-top: 1rem; display: block; text-align: center; }
 
   /* FOOTER */
   .footer { background: var(--black); text-align: center; padding: 4rem 1.5rem; }
@@ -219,16 +217,14 @@
   @media (max-width: 480px) {
     .info-card { padding: 2rem 1.2rem; }
     .info-val.big { font-size: 1.7rem; }
-    .gallery-grid { gap: 4px; }
     .countdown { gap: 1.2rem; }
+    .gallery-grid { gap: 4px; }
   }
 </style>
 </head>
 <body>
 
 <div id="yt-player"></div>
-
-
 
 <!-- HERO -->
 <section class="hero">
@@ -280,9 +276,7 @@
         <span class="info-lbl">Địa điểm</span>
         <span class="venue-name">Tư Gia Nhà Gái</span>
         <span class="venue-addr">Đường N16 · Thới Hòa · TP. Hồ Chí Minh</span><br>
-        <a class="map-link" href="https://www.google.com/maps/place/Nh%C3%A0+tr%E1%BB%8D+Nh%C3%A2n+T%C3%A2m/@11.0846069,106.6118166,17z/data=!3m1!4b1!4m6!3m5!1s0x3174cdc43c860cc7:0x6d3f5fae039b3255!8m2!3d11.0846069!4d106.6118166!16s%2Fg%2F11lkhnq7f_!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-          ↗ Xem trên Google Maps
-        </a>
+        <a class="map-link" href="https://www.google.com/maps/place/Nh%C3%A0+tr%E1%BB%8D+Nh%C3%A2n+T%C3%A2m/@11.0846069,106.6118166,17z" target="_blank">↗ Xem trên Google Maps</a>
       </div>
     </div>
   </div>
@@ -313,16 +307,12 @@
     <h2 class="section-title">Khoảnh khắc của chúng mình</h2>
     <div class="divider"><div class="diamond"></div></div>
   </div>
-  <div class="gallery-grid" style="padding: 0 6px;">
-    <!-- Ảnh 1: full width -->
+  <div class="gallery-grid">
     <div class="gallery-item wide"><img src="photo1.jpg" alt="Anh Thư & Văn Lợi"></div>
-    <!-- Ảnh 2-3: 2 cột -->
     <div class="gallery-item"><img src="photo2.jpg" alt="Lãng mạn"></div>
     <div class="gallery-item"><img src="photo3.jpg" alt="Cùng nhau"></div>
-    <!-- Ảnh 4-5: 2 cột -->
     <div class="gallery-item"><img src="photo4.jpg" alt="Hạnh phúc"></div>
     <div class="gallery-item"><img src="photo5.jpg" alt="Yêu thương"></div>
-    <!-- Ảnh 6: full width -->
     <div class="gallery-item wide"><img src="photo6.jpg" alt="Mãi bên nhau"></div>
   </div>
 </section>
@@ -349,8 +339,7 @@
     <h2 class="section-title">Tìm đường đến với chúng tôi</h2>
     <div class="divider"><div class="diamond"></div></div>
   </div>
-  <iframe
-    class="map-embed"
+  <iframe class="map-embed"
     src="https://maps.google.com/maps?q=11.0846069,106.6118166&z=17&output=embed"
     allowfullscreen loading="lazy">
   </iframe>
@@ -360,22 +349,43 @@
 <section class="gift-section">
   <div class="section-inner">
     <span class="section-label">Hộp mừng cưới</span>
-    <h2 class="section-title dark">Mừng cưới</h2>
+    <h2 class="section-title">Mừng cưới</h2>
     <div class="divider"><div class="diamond"></div></div>
     <p class="gift-note">
-      Nếu bạn muốn gửi lời chúc mừng<br>
-      qua hộp mừng cưới, xin chân thành cảm ơn!
+      Nếu bạn muốn gửi lời chúc mừng qua hộp mừng cưới,<br>
+      chúng tôi xin chân thành cảm ơn tấm lòng của bạn.
     </p>
     <div class="qr-card">
-      <span class="qr-card-label">❀ Mừng cưới đến chú rể</span>
-      <img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi">
+      <div class="qr-card-top">
+        <span class="qr-card-label">❀ Mừng cưới chú rể</span>
+      </div>
+      <div class="qr-wrap">
+        <img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi">
+      </div>
       <div class="qr-divider"></div>
+      <span class="bank-name">Vietcombank</span>
       <div class="bank-info">
-        <p>Ngân hàng: <strong>Vietcombank</strong></p>
-        <p>Tên: <strong>Phạm Văn Lợi</strong></p>
-        <p>STK: <strong>0281000655718</strong></p>
+        <p>Chủ tài khoản: <strong>Phạm Văn Lợi</strong></p>
+        <p>Số tài khoản: <strong>0281000655718</strong></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section">
+  <div class="section-inner" style="text-align:center;">
+    <span class="section-label">Xác nhận tham dự</span>
+    <h2 class="section-title dark">Bạn có thể đến không?</h2>
+    <div class="divider"><div class="diamond"></div></div>
+    <p class="invite-text" style="margin-bottom:0;">
+      Vui lòng xác nhận tham dự trước ngày <strong>12/07/2025</strong><br>
+      để chúng tôi chuẩn bị chu đáo hơn nhé!
+    </p>
+    <a class="rsvp-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf53irezIzGMdi-Dio3E2UGzURzEJyVlz7RAVC3GiAzyhy_EQ/viewform" target="_blank">
+      <span>✦ Xác nhận tham dự ✦</span>
+    </a>
+    <span class="rsvp-note">Nhấn vào để điền form xác nhận</span>
   </div>
 </section>
 
@@ -406,18 +416,20 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // YOUTUBE MUSIC - tự động phát
+  // YOUTUBE - tự động phát khi user tương tác lần đầu
   let player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('yt-player', {
       videoId: 'V5USxHhWi3E',
-      playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: 'V5USxHhWi3E', mute: 0 },
+      playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: 'V5USxHhWi3E' },
       events: {
         onReady: e => {
-          // Thử autoplay, nếu trình duyệt chặn thì chờ user tương tác
           try { e.target.playVideo(); } catch(err) {}
-          // Fallback: phát khi user chạm màn hình lần đầu
-          const unlock = () => { e.target.playVideo(); document.removeEventListener('click', unlock); document.removeEventListener('touchstart', unlock); };
+          const unlock = () => {
+            e.target.playVideo();
+            document.removeEventListener('click', unlock);
+            document.removeEventListener('touchstart', unlock);
+          };
           document.addEventListener('click', unlock);
           document.addEventListener('touchstart', unlock);
         }
@@ -431,16 +443,12 @@
   // SCROLL FADE IN
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('section').forEach(s => {
+  document.querySelectorAll('section, footer').forEach(s => {
     s.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    s.style.opacity = '0';
-    s.style.transform = 'translateY(20px)';
+    s.style.opacity = '0'; s.style.transform = 'translateY(20px)';
     observer.observe(s);
   });
 </script>
