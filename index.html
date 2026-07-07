@@ -27,7 +27,7 @@
     background-image: url('photo1.jpg');
     background-size: cover;
     background-position: center 30%;
-    filter: brightness(0.38);
+    filter: brightness(0.45);
     animation: slowZoom 20s ease-in-out infinite alternate;
   }
   @keyframes slowZoom {
@@ -36,7 +36,7 @@
   }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.45) 60%, rgba(10,10,10,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.9) 100%);
   }
   .hero-content {
     position: relative; z-index: 1; text-align: center; padding: 2rem;
@@ -49,18 +49,23 @@
   .hero-label { font-weight: 200; font-size: 0.6rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: block; }
   .hero-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 300; color: white; line-height: 1.1; font-style: italic; }
   .hero-amp { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 3rem); color: var(--gold); font-style: italic; display: block; margin: 0.3rem 0; }
-  .hero-date { margin-top: 2rem; font-weight: 200; font-size: 0.7rem; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+  .hero-date {
+    margin-top: 2rem; font-weight: 300; font-size: 0.75rem;
+    letter-spacing: 0.35em; color: rgba(255,255,255,0.95);
+    text-transform: uppercase;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+  }
   .scroll-hint {
     position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: rgba(255,255,255,0.4); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5); font-size: 0.55rem; letter-spacing: 0.3em;
     animation: bounce 2s ease infinite;
   }
   @keyframes bounce {
     0%,100% { transform: translateX(-50%) translateY(0); }
     50%      { transform: translateX(-50%) translateY(6px); }
   }
-  .scroll-hint svg { width: 16px; opacity: 0.5; }
+  .scroll-hint svg { width: 16px; opacity: 0.6; }
 
   /* SECTIONS */
   section { padding: 5rem 1.5rem; }
@@ -101,19 +106,13 @@
   .gallery-section { background: var(--black); }
   .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; max-width: 800px; margin: 0 auto; padding: 0 6px; }
   .gallery-item { overflow: hidden; position: relative; aspect-ratio: 2/3; }
-  .gallery-item.wide { grid-column: 1 / -1; aspect-ratio: 16/9; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; transition: transform 0.6s ease; display: block; }
-  /* photo1 - ảnh đôi đứng, căn phần mặt */
-  .gallery-item:nth-child(1) img { object-position: center 18%; }
-  /* photo2 - hôn nhau trong lồng kính */
+  .gallery-item.wide { grid-column: 1 / -1; aspect-ratio: 4/3; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
+  .gallery-item:nth-child(1) img { object-position: center 22%; }
   .gallery-item:nth-child(2) img { object-position: center 20%; }
-  /* photo3 - đứng cạnh cổng sắt, 2 người */
   .gallery-item:nth-child(3) img { object-position: 35% 20%; }
-  /* photo4 - thác nước */
   .gallery-item:nth-child(4) img { object-position: center 15%; }
-  /* photo5 - ngồi trên bệ đá */
   .gallery-item:nth-child(5) img { object-position: center 10%; }
-  /* photo6 - nâng ly champagne */
   .gallery-item:nth-child(6) img { object-position: center 20%; }
   .gallery-item:hover img { transform: scale(1.04); }
 
@@ -128,80 +127,44 @@
   .map-section .section-inner { padding-bottom: 3rem; }
   .map-embed { width: 100%; height: 320px; border: none; filter: grayscale(0.2); display: block; margin-top: 2rem; }
 
-  /* QR - SANG TRỌNG */
+  /* QR */
   .gift-section { background: var(--black); }
   .gift-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2.5rem; text-align: center; }
+  .qr-cards { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
   .qr-card {
-    max-width: 300px; margin: 0 auto;
+    width: 260px;
     background: linear-gradient(145deg, #1a1a1a, #111);
     border: 1px solid rgba(201,168,76,0.3);
     border-radius: 20px;
-    padding: 2.5rem 2rem 2rem;
+    padding: 2rem 1.8rem 1.8rem;
     text-align: center;
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
   }
-  .qr-card::before {
-    content: '';
-    position: absolute; inset: 6px;
-    border: 1px solid rgba(201,168,76,0.1);
-    border-radius: 15px;
-    pointer-events: none;
-  }
-  .qr-card-top {
-    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-    margin-bottom: 1.8rem;
-  }
-  .qr-card-top::before, .qr-card-top::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
-  }
+  .qr-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(201,168,76,0.1); border-radius: 15px; pointer-events: none; }
+  .qr-card-top { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .qr-card-top::before, .qr-card-top::after { content: ''; flex: 1; height: 1px; }
+  .qr-card-top::before { background: linear-gradient(to right, transparent, rgba(201,168,76,0.4)); }
   .qr-card-top::after { background: linear-gradient(to left, transparent, rgba(201,168,76,0.4)); }
-  .qr-card-label { font-size: 0.5rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
-  .qr-wrap {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 0 auto 1.5rem;
-    width: 180px; height: 180px;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
+  .qr-card-label { font-size: 0.48rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  .qr-wrap { background: white; border-radius: 10px; padding: 0.8rem; margin: 0 auto 1.2rem; width: 160px; height: 160px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
   .qr-img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .qr-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent); margin: 1.2rem 0; }
-  .bank-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem; font-weight: 600;
-    color: var(--gold); letter-spacing: 0.1em;
-    display: block; margin-bottom: 0.8rem;
-  }
-  .bank-info { font-size: 0.68rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); line-height: 2.2; }
+  .qr-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent); margin: 1rem 0; }
+  .bank-name { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; display: block; margin-bottom: 0.6rem; }
+  .bank-info { font-size: 0.65rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.5); line-height: 2.2; }
   .bank-info strong { color: rgba(255,255,255,0.85); font-weight: 400; }
 
   /* RSVP */
   .rsvp-section { background: var(--white); }
   .rsvp-btn {
     display: inline-flex; align-items: center; gap: 0.8rem;
-    margin-top: 1.5rem;
-    padding: 1rem 2.5rem;
-    background: var(--black);
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300; font-size: 0.65rem;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid rgba(201,168,76,0.4);
-    transition: all 0.3s;
-    position: relative; overflow: hidden;
+    margin-top: 1.5rem; padding: 1rem 2.5rem;
+    background: var(--black); color: white;
+    font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.4); transition: all 0.3s; position: relative; overflow: hidden;
   }
-  .rsvp-btn::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--gold);
-    transform: translateX(-100%);
-    transition: transform 0.4s ease;
-    z-index: 0;
-  }
+  .rsvp-btn::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateX(-100%); transition: transform 0.4s ease; z-index: 0; }
   .rsvp-btn:hover::before { transform: translateX(0); }
   .rsvp-btn span { position: relative; z-index: 1; }
   .rsvp-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--gray); margin-top: 1rem; display: block; text-align: center; }
@@ -219,11 +182,11 @@
     .info-val.big { font-size: 1.7rem; }
     .countdown { gap: 1.2rem; }
     .gallery-grid { gap: 4px; }
+    .qr-cards { flex-direction: column; align-items: center; }
   }
 </style>
 </head>
 <body>
-
 <div id="yt-player"></div>
 
 <!-- HERO -->
@@ -237,7 +200,7 @@
       <span class="hero-amp">&amp;</span>
       Văn Lợi
     </div>
-    <p class="hero-date">Chủ Nhật · 19 · 07 · 2025</p>
+    <p class="hero-date">Chủ Nhật · 19 · 07 · 2026</p>
   </div>
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -263,7 +226,7 @@
           <span class="info-lbl">Ngày</span>
           <span class="info-val" style="font-size:0.85rem;letter-spacing:0.06em;">Chủ Nhật</span>
           <span class="info-val big">19</span>
-          <span class="info-val" style="font-size:0.8rem;">Tháng 07 · 2025</span>
+          <span class="info-val" style="font-size:0.8rem;">Tháng 07 · 2026</span>
         </div>
         <div class="info-sep"></div>
         <div class="info-col">
@@ -355,18 +318,28 @@
       Nếu bạn muốn gửi lời chúc mừng qua hộp mừng cưới,<br>
       chúng tôi xin chân thành cảm ơn tấm lòng của bạn.
     </p>
-    <div class="qr-card">
-      <div class="qr-card-top">
-        <span class="qr-card-label">❀ Mừng cưới chú rể</span>
+    <div class="qr-cards">
+      <!-- Cô dâu -->
+      <div class="qr-card">
+        <div class="qr-card-top"><span class="qr-card-label">❀ Mừng cưới cô dâu</span></div>
+        <div class="qr-wrap"><img class="qr-img" src="qr2.jpg" alt="QR Mừng cưới Nguyễn Thị Anh Thư"></div>
+        <div class="qr-divider"></div>
+        <span class="bank-name">Agribank</span>
+        <div class="bank-info">
+          <p>Chủ tài khoản: <strong>Nguyễn Thị Anh Thư</strong></p>
+          <p>Số tài khoản: <strong>5503205516319</strong></p>
+        </div>
       </div>
-      <div class="qr-wrap">
-        <img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi">
-      </div>
-      <div class="qr-divider"></div>
-      <span class="bank-name">Vietcombank</span>
-      <div class="bank-info">
-        <p>Chủ tài khoản: <strong>Phạm Văn Lợi</strong></p>
-        <p>Số tài khoản: <strong>0281000655718</strong></p>
+      <!-- Chú rể -->
+      <div class="qr-card">
+        <div class="qr-card-top"><span class="qr-card-label">❀ Mừng cưới chú rể</span></div>
+        <div class="qr-wrap"><img class="qr-img" src="qr.jpg" alt="QR Mừng cưới Phạm Văn Lợi"></div>
+        <div class="qr-divider"></div>
+        <span class="bank-name">Vietcombank</span>
+        <div class="bank-info">
+          <p>Chủ tài khoản: <strong>Phạm Văn Lợi</strong></p>
+          <p>Số tài khoản: <strong>0281000655718</strong></p>
+        </div>
       </div>
     </div>
   </div>
@@ -379,7 +352,7 @@
     <h2 class="section-title dark">Bạn có thể đến không?</h2>
     <div class="divider"><div class="diamond"></div></div>
     <p class="invite-text" style="margin-bottom:0;">
-      Vui lòng xác nhận tham dự trước ngày <strong>12/07/2025</strong><br>
+      Vui lòng xác nhận tham dự trước ngày <strong>12/07/2026</strong><br>
       để chúng tôi chuẩn bị chu đáo hơn nhé!
     </p>
     <a class="rsvp-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf53irezIzGMdi-Dio3E2UGzURzEJyVlz7RAVC3GiAzyhy_EQ/viewform" target="_blank">
@@ -393,13 +366,13 @@
 <footer class="footer">
   <div class="divider" style="max-width:300px;margin:0 auto 2rem;"><div class="diamond"></div></div>
   <p class="footer-names">Anh Thư &amp; Văn Lợi</p>
-  <p class="footer-date">19 · 07 · 2025 · TP. Hồ Chí Minh</p>
+  <p class="footer-date">19 · 07 · 2026 · TP. Hồ Chí Minh</p>
   <div class="footer-line"></div>
 </footer>
 
 <script>
-  // COUNTDOWN
-  const wedding = new Date('2025-07-19T11:00:00');
+  // COUNTDOWN - 19/07/2026
+  const wedding = new Date('2026-07-19T11:00:00');
   function tick() {
     const now = new Date(), diff = wedding - now;
     if (diff <= 0) {
@@ -416,7 +389,7 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // YOUTUBE - tự động phát khi user tương tác lần đầu
+  // YOUTUBE - tự động phát khi user tương tác
   let player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('yt-player', {
