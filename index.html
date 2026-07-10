@@ -123,9 +123,39 @@
   .quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: var(--gray); line-height: 1.9; }
 
   /* MAP */
-  .map-section { background: var(--black); padding-bottom: 0; }
-  .map-section .section-inner { padding-bottom: 3rem; }
-  .map-embed { width: 100%; height: 320px; border: none; filter: grayscale(0.2); display: block; margin-top: 2rem; }
+  .map-section { background: var(--black); }
+  .map-card {
+    margin-top: 2rem; text-align: center;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px; padding: 3rem 2rem;
+    background: linear-gradient(145deg, #161616, #0e0e0e);
+    position: relative; overflow: hidden;
+  }
+  .map-card::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid rgba(201,168,76,0.08); border-radius: 12px; pointer-events: none;
+  }
+  .map-icon {
+    width: 52px; height: 52px; margin: 0 auto 1.2rem;
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-icon svg { width: 24px; height: 24px; stroke: var(--gold); }
+  .map-venue {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-weight: 600; color: white; margin-bottom: 0.5rem;
+  }
+  .map-addr { font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); margin-bottom: 2rem; }
+  .map-open-btn {
+    display: inline-flex; align-items: center;
+    padding: 0.85rem 2rem;
+    background: transparent; color: var(--gold);
+    font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.62rem;
+    letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 4px;
+    transition: all 0.3s;
+  }
+  .map-open-btn:hover { background: var(--gold); color: var(--black); }
 
   /* QR */
   .gift-section { background: var(--black); }
@@ -301,11 +331,20 @@
     <span class="section-label">Địa điểm</span>
     <h2 class="section-title">Tìm đường đến với chúng tôi</h2>
     <div class="divider"><div class="diamond"></div></div>
+    <div class="map-card">
+      <div class="map-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <p class="map-venue">Tư Gia Nhà Gái</p>
+      <p class="map-addr">Đường N16 · Thới Hòa · TP. Hồ Chí Minh</p>
+      <a class="map-open-btn" href="https://www.google.com/maps/place/Nh%C3%A0+tr%E1%BB%8D+Nh%C3%A2n+T%C3%A2m/@11.0846069,106.6118166,17z" target="_blank">
+        <span>↗ Mở Google Maps</span>
+      </a>
+    </div>
   </div>
-  <iframe class="map-embed"
-    src="https://maps.google.com/maps?q=11.0846069,106.6118166&z=17&output=embed"
-    allowfullscreen loading="lazy">
-  </iframe>
 </section>
 
 <!-- QR GIFT -->
